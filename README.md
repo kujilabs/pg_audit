@@ -1,6 +1,6 @@
 # PgAudit
 
-TODO: Write a gem description
+Audit and Readonly capabilities for a Postgres Database
 
 ## Installation
 
@@ -19,14 +19,31 @@ Or install it yourself as:
 
 ## Migrations
 
-You then neeed to run the migration generator
+You then need to run the migration generator
 
-rails g pg_audit:migration
+	rails g pg_audit:migration
 
 
 ## Usage
 
-TODO: Write usage instructions here
+There are two modules that can be included
+
+1. PgAudit::Audit `include PgAudit::Audit`
+2. PgAudit::Readonly `include PgAudit::Readonly`
+
+There are additional methods you can include to modify the default behaviour
+
+PgAudit::Audit
+	
+1. columns_for_audit - return an error of the names	to be included
+2. columns_to_ignore_for_audit - return an error of names not to be included
+3. audit_delete - return true/false whether you record delete transactions
+4. audit_create - return true/false whether you record create transactions
+
+PgAudit::Readonly
+
+1. read_only_columns - return an error of read only columns
+
 
 ## Contributing
 
