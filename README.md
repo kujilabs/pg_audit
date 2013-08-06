@@ -16,6 +16,14 @@ Or install it yourself as:
 
     $ gem install pg_audit
 
+
+## Migrations
+
+You then neeed to run the migration generator
+
+rails g pg_audit:migration
+
+
 ## Usage
 
 TODO: Write usage instructions here
