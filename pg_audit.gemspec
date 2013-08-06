@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = PgAudit::VERSION
   spec.authors       = ["stellard"]
   spec.email         = ["scott.ellard@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Audit functionality for Postgres database}
+  spec.summary       = %q{Audit functionality for Postgres database}
   spec.homepage      = ""
   spec.license       = "MIT"
 
