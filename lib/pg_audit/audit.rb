@@ -16,7 +16,7 @@ module PgAudit::Audit
     end
 
     def columns_to_ignore_for_audit
-       %w|created_at updated_at|
+       %w|created_at updated_at id|
     end
 
     #this allows migrations to run when an audited column is added/removed in a later migration
