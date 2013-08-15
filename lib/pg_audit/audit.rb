@@ -16,7 +16,7 @@ module PgAudit::Audit
     end
 
     def columns_to_ignore_for_audit
-       %w||
+       %w|created_at updated_at|
     end
 
     #this allows migrations to run when an audited column is added/removed in a later migration
@@ -35,6 +35,7 @@ module PgAudit::Audit
     #+++++++++
 
     def drop_audit_triggers
+      self.connection.execute "DROP TRIGGER IF EXISTS #{self.table_name}_audit_update ON #{self.table_name}"
       self.connection.execute "DROP TRIGGER IF EXISTS #{self.table_name}_audit_update_selective ON #{self.table_name}"
       self.connection.execute "DROP TRIGGER IF EXISTS #{self.table_name}_audit_delete ON #{self.table_name}"
       self.connection.execute "DROP TRIGGER IF EXISTS #{self.table_name}_audit_insert ON #{self.table_name}"
@@ -58,8 +59,13 @@ module PgAudit::Audit
         |
       end
 
-      unless exsiting_columns_for_audit.empty?
-
+      if exsiting_columns_for_audit.empty?
+        self.connection.execute %|
+          CREATE TRIGGER #{self.table_name}_audit_update
+          AFTER UPDATE ON #{self.table_name} FOR EACH ROW
+          EXECUTE PROCEDURE audit.if_modified_func('t', '{#{columns_to_ignore_for_audit.join(',')}}');
+        |        
+      else
         self.connection.execute %|
         CREATE TRIGGER #{self.table_name}_audit_update_selective
         AFTER UPDATE ON #{self.table_name} FOR EACH ROW
