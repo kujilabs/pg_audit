@@ -31,18 +31,18 @@ There are two modules that can be included
 1. PgAudit::Audit `include PgAudit::Audit`
 2. PgAudit::Readonly `include PgAudit::Readonly`
 
-There are additional methods you can include to modify the default behaviour
+There are additional class methods you can include to modify the default behaviour
 
 PgAudit::Audit
 	
-1. columns_for_audit - return an error of the names	to be included
-2. columns_to_ignore_for_audit - return an error of names not to be included
+1. columns_for_audit - return an array of the column names to be included in the audit
+2. columns_to_ignore_for_audit - return an array of column names not to be included
 3. audit_delete - return true/false whether you record delete transactions
 4. audit_create - return true/false whether you record create transactions
 
 PgAudit::Readonly
 
-1. read_only_columns - return an error of read only columns
+1. read_only_columns - return an array of columns that will be read only
 
 
 ## Contributing
