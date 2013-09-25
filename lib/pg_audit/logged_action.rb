@@ -1,9 +1,7 @@
 class PgAudit::LoggedAction < ActiveRecord::Base
   self.table_name = 'audit.logged_actions'
   self.primary_key = "event_id"
-  serialize :changed_fields, ActiveRecord::Coders::Hstore
-  serialize :row_data, ActiveRecord::Coders::Hstore
-
+  
   scope :for_model, -> model { where(:table_name => model.table_name) }
   scope :with_id, -> id { 
     id = (id.respond_to?(:id) ? id.id : id)

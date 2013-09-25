@@ -1,3 +1,3 @@
 module PgAudit
-  VERSION = "0.0.5"
+  VERSION = "1.0.7"
 end
