@@ -3,7 +3,7 @@ module PgAudit::Audit
   extend ActiveSupport::Concern
 
   included do
-    has_many :audit_updates, :class_name => "Audit::#{self}", :foreign_key => :id, :conditions => { :action => 'U' }, :order => "scope_version DESC"
+    has_many :audit_updates, -> { where(:action => 'U').order("scope_version DESC") }, :class_name => "Audit::#{self}", :foreign_key => :id
   end
 
   def history
